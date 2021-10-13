@@ -55,7 +55,7 @@ List of constants used for bounds of attributes, and multipliers for effects. Fu
 
 * **Farmer** - Grows food to feed to other Meeples
     * food_production_rate - how much food produced per day
-        * float -> *MIN_FOOD_KNOWLEDGE* to *farm_knowledge*
+        * float -> *MIN_FARM_KNOWLEDGE* to *farm_knowledge*
 * **Doctor** - Heals sick Meeples
     * healing_power - how much health can restore per day
         int -> *MIN_HEALTH_KNOWLEDGE* to *health_knowledge*
