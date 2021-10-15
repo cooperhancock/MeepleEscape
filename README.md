@@ -1,6 +1,6 @@
 # Meeple Escape
 
-Using Python 3.10 to create Meeple Escape Simulation
+Using Python to create Meeple Escape Simulation
 
 ## Initial Outline
 
