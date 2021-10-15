@@ -72,6 +72,11 @@ class Village():
         new_meeple.intelligence = old_meeple.intelligence
         new_meeple.diet = old_meeple.diet
 
+    def feed_meeples(self, rations):
+        for i in range(rations):
+            self.meeples[i].hunger += rations[i]
+
+
 if __name__ == "__main__":
     village = Village()
     village.populate(3,3,3)

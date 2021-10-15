@@ -43,3 +43,7 @@ def calc_new_doctor_rate(intelligence, health_knowledge) -> float:
 
 def calc_new_researcher_rates(intelligence, farm_knowledge, health_knowledge, escape_knowledge) -> tuple:
     return (MIN_FARM_RESEARCH_RATE, MIN_HEALTH_RESEARCH_RATE, MIN_ESCAPE_RESEARCH_RATE)
+
+def ration_system(meeples, food):
+    per_meeple = food / len(meeples)
+    rations = [per_meeple for i in range(len(meeples))]
