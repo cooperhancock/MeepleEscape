@@ -26,6 +26,7 @@ MIN_INITIAL_FOOD_MULTIPLIER = 0.5
 MIN_INITIAL_FOOD_MULTIPLIER = 1.5
 INTELLIGENCE_MEAN = 0.5
 INTELLIGENCE_STDEV = 0.2
+DAYS_PER_WEEK = 7
 
 # Utility functions
 
@@ -35,10 +36,10 @@ def random_name():
 # Functions
 
 def calc_new_farmer_rate(intelligence, farm_knowledge) -> float:
-    return random.random(MIN_FARM_KNOWLEDGE, farm_knowledge)
+    return random.uniform(MIN_FARM_KNOWLEDGE, farm_knowledge)
 
 def calc_new_doctor_rate(intelligence, health_knowledge) -> float:
-    return random.random(MIN_HEALTH_KNOWLEDGE, health_knowledge)
+    return random.uniform(MIN_HEALTH_KNOWLEDGE, health_knowledge)
 
 def calc_new_researcher_rates(intelligence, farm_knowledge, health_knowledge, escape_knowledge) -> tuple:
-    pass
+    return (MIN_FARM_RESEARCH_RATE, MIN_HEALTH_RESEARCH_RATE, MIN_ESCAPE_RESEARCH_RATE)

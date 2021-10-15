@@ -101,7 +101,7 @@ List of constants used for bounds of attributes, and multipliers for effects. Fu
 
 #### Functions
 
-* create_village() - creates Village and populates with Meeples
+* populate() - creates Village and populates with Meeples
     * start farm & health knowledge randomly in the low end of each range
         * *farm_knowledge* random in *MIN_FARM_KNOWLEDGE* to *MAX_INITIAL_FARM_KNOWLEDGE*
         * *health_knowledge* random in *MIN_HEALTH_KNOWLEDGE* to *MAX_INITIAL_HEALTH_KNOWLEDGE*
