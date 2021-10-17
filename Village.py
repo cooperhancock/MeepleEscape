@@ -76,10 +76,20 @@ class Village():
         for i in range(rations):
             self.meeples[i].hunger += rations[i]
 
+    def kill_meeple(self, id):
+        dead = self.meeples.pop(id)
+        for i in range(id,len(self.meeples)):
+            self.meeples[i].id = i
+
+    # TODO
+    def analyze_health(self):
+        pass
 
 if __name__ == "__main__":
     village = Village()
     village.populate(3,3,3)
     print(village)
     village.reassign(8, 'f')
+    print(village)
+    village.kill_meeple(8)
     print(village)

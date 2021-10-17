@@ -30,6 +30,11 @@ class Farmer(Meeple):
         self.food_production_rate = Lib.MIN_FARM_KNOWLEDGE
     def __repr__(self) -> str:
         return super().__repr__() + ' : farmer'
+    # TODO
+    def produce(self) -> int:
+        pass
+    def boost(self) -> None:
+        self.food_production_rate += Lib.boost_amounts()
 
 class Doctor(Meeple):
     def __init__(self, id) -> None:
@@ -37,6 +42,11 @@ class Doctor(Meeple):
         self.healing_power = Lib.MIN_HEALTH_KNOWLEDGE
     def __repr__(self) -> str:
         return super().__repr__() + ' : doctor'
+    # TODO
+    def heal(self, meeples) -> None:
+        pass
+    def boost(self) -> None:
+        self.healing_power += Lib.boost_amounts()
 
 class Researcher(Meeple):
     def __init__(self, id) -> None:
@@ -46,5 +56,11 @@ class Researcher(Meeple):
         self.escape_research_rate = Lib.MIN_ESCAPE_RESEARCH_RATE
     def __repr__(self) -> str:
         return super().__repr__() + ' : researcher'
+    def research(self) -> tuple:
+        return Lib.research_amounts(self.intelligence, self.farm_research_rate, self.health_research_rate, self.escape_research_rate)
+    def boost(self) -> None:
+        self.farm_research_rate += Lib.boost_amounts()        
+        self.health_research_rate += Lib.boost_amounts() 
+        self.escape_research_rate += Lib.boost_amounts() 
 
     

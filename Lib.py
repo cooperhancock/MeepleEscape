@@ -27,6 +27,7 @@ MIN_INITIAL_FOOD_MULTIPLIER = 1.5
 INTELLIGENCE_MEAN = 0.5
 INTELLIGENCE_STDEV = 0.2
 DAYS_PER_WEEK = 7
+MIN_HEALTH_TO_WORK = 50
 
 # Utility functions
 
@@ -44,6 +45,31 @@ def calc_new_doctor_rate(intelligence, health_knowledge) -> float:
 def calc_new_researcher_rates(intelligence, farm_knowledge, health_knowledge, escape_knowledge) -> tuple:
     return (MIN_FARM_RESEARCH_RATE, MIN_HEALTH_RESEARCH_RATE, MIN_ESCAPE_RESEARCH_RATE)
 
-def ration_system(meeples, food):
+def ration_system(meeples, food) -> list:
     per_meeple = food / len(meeples)
     rations = [per_meeple for i in range(len(meeples))]
+    return rations
+
+# TODO
+def health_decrement(hunger, health) -> int:
+    pass
+
+# TODO
+def net_production(fpr, hunger, health) -> int:
+    pass
+
+# TODO
+def net_healing(hp, hunger, health) -> int:
+    pass
+
+# TODO
+def healing_schedule(meeples, hp) -> list:
+    pass
+
+# TODO
+def research_amounts(intelligence, f_rate, h_rate, e_rate) -> tuple:
+    pass
+
+# TODO
+def boost_amounts():
+    pass
