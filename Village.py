@@ -13,7 +13,8 @@ class Village():
         self.day = 0
         self.escape = 0.0
         self.food = 0
-        self.report = []
+        self.report = ""
+        self.end_report = ""
 
     def __repr__(self) -> str:
         s = 'Village:\n'
@@ -32,7 +33,7 @@ class Village():
 
     def new_doctor(self, id) -> Meeple.Doctor:
         doctor = Meeple.Doctor(id)
-        doctor.healing_power = Lib.calc_new_doctor_rate(doctor.intelligence, self.health_knowledge)
+        doctor.healing_power = int(Lib.calc_new_doctor_rate(doctor.intelligence, self.health_knowledge))
         return doctor 
 
     def new_researcher(self, id) -> Meeple.Researcher:
@@ -72,18 +73,32 @@ class Village():
         new_meeple.intelligence = old_meeple.intelligence
         new_meeple.diet = old_meeple.diet
 
-    def feed_meeples(self, rations):
-        for i in range(rations):
+    def feed_meeples(self, rations) -> int:
+        food_spent = 0
+        for i in range(len(rations)):
             self.meeples[i].hunger += rations[i]
+            food_spent += rations[i]
+        self.food -= food_spent
+        return food_spent
 
     def kill_meeple(self, id):
         dead = self.meeples.pop(id)
         for i in range(id,len(self.meeples)):
             self.meeples[i].id = i
 
-    # TODO
-    def analyze_health(self):
-        pass
+    def analyze_health(self) -> tuple:
+        sick_meeples = 0
+        died = 0
+        for m in self.meeples:
+            dec = Lib.health_decrement(m.hunger, m.health)
+            m.health -= dec
+            if m.health < Lib.MIN_HEALTH_TO_WORK:
+                sick_meeples += 1
+            if m.health <= 0:
+                died += 1
+                sick_meeples -= 1
+                self.kill_meeple(m.id)
+        return sick_meeples, died
 
 if __name__ == "__main__":
     village = Village()
