@@ -5,7 +5,7 @@ import Meeple
 import numpy
 import random
 
-class Village():
+class Village:
     def __init__(self) -> None:
         self.meeples = []
         self.farm_knowledge = random.uniform(Lib.MIN_FARM_KNOWLEDGE, Lib.MAX_INITIAL_FARM_KNOWLEDGE)
@@ -20,7 +20,7 @@ class Village():
         s = 'Village:\n'
         s += 'day: ' + str(self.day)
         s += ', food: ' + str(self.food)
-        s += ', rates: ' + str(self.farm_knowledge) + ' ' + str(self.health_knowledge) + ' ' + str(self.escape)
+        s += ', rates: ' + str("{:.2f}".format(self.farm_knowledge)) + ' ' + str("{:.2f}".format(self.health_knowledge)) + ' ' + str("{:.2f}".format(self.escape))
         s += '\nPeople:\n'
         for m in self.meeples:
             s += str(m) + '\n'
@@ -76,8 +76,8 @@ class Village():
     def feed_meeples(self, rations) -> int:
         food_spent = 0
         for i in range(len(rations)):
-            self.meeples[i].hunger += rations[i]
-            food_spent += rations[i]
+            self.meeples[i].hunger += int(rations[i])
+            food_spent += int(rations[i])
         self.food -= food_spent
         return food_spent
 

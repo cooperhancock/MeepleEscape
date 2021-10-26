@@ -10,8 +10,8 @@ def advance_day(village: Village) -> bool:
     # make meeples hungry
     req_food = 0
     for m in village.meeples:
-        m.hunger -= m.diet
-        req_food += m.diet
+        m.hunger -= min(m.diet, m.hunger)
+        req_food += min(m.diet, m.hunger)
     village.report += str(req_food) + ' food needed\n'
     # feed meeples
     fed = village.feed_meeples(ration_system(village.meeples, village.food))
@@ -25,6 +25,7 @@ def advance_day(village: Village) -> bool:
         return end_game(False)
     # healthy meeples work
     food = 0
+    healing = 0
     for m in village.meeples:
         if m.health > MIN_HEALTH_TO_WORK:
             if isinstance(m, Farmer):
@@ -32,15 +33,16 @@ def advance_day(village: Village) -> bool:
                 village.food += this_food
                 food += this_food
             if isinstance(m, Doctor):
-                m.heal(healing_schedule(village.meeples, m.healing_power))
+                healing += m.heal(village.meeples)
             if isinstance(m, Researcher):
                 f, h, e = m.research()
                 village.farm_knowledge += f
                 village.health_knowledge += h
                 village.escape += e
     village.report += str(food) + ' food produced\n'
+    village.report += str(healing) + ' healing used\n'
     # check if meeples can escape
-    if village.escape == ESCAPE_POINT:
+    if village.escape >= ESCAPE_POINT:
         return end_game(True)
     village.day += 1
     village.report += '-- end day --\n\n'

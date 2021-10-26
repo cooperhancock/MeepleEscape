@@ -23,11 +23,27 @@ while True:
     if week(game_village): break
     print("input 'f', 'd', 'r' and an id to change a Meeple's job to farmer, doctor, or reseacher")
     print("input 'done' when finished or 'q' to quit game")
-    while True:
-        job = restricted_input('', ['f', 'd', 'r', 'done', 'q'])
-        if job == 'q': exit()
-        if job == 'done': break
-        id = int(restricted_input('', list(map(lambda x: str(x.id), game_village.meeples))))
-        game_village.reassign(id, job)
+    command = ''
+    while not command == 'done':
+        usr_in = input('enter command > ').split(' ')
+        command = usr_in[0]
+        id = 0
+        if command == 'q':
+            exit()
+        elif command == 'done':
+            break
+        try:
+            if len(usr_in) > 1:
+                id = int(usr_in[1])
+            else:
+                print('must indicate id of meeple')
+        except:
+                print('id must be integer')
+        if (command in ['f','d','r']) and id < len(game_village.meeples):
+            game_village.reassign(id, command)
+            print(f"reassigned: {game_village.meeples[id]}")
+        else:
+            print('invalid command')
+            
 
 print(game_village.end_report)
